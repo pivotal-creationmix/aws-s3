@@ -6,8 +6,8 @@ version: !ruby/object:Gem::Version
   - 0
   - 6
   - 2
-  - 1272577370
-  version: 0.6.2.1272577370
+  - 1272578393
+  version: 0.6.2.1272578393
 platform: ruby
 authors: 
 - Marcel Molina Jr.

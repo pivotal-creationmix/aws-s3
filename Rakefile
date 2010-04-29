@@ -81,7 +81,7 @@ namespace :dist do
   end
   
   task :gemspec do
-    File.open('.gemspec', 'a+') do |f|
+    File.open('aws-s3.gemspec', 'a+') do |f|
       f.puts spec.to_yaml
     end
   end
