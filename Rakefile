@@ -79,6 +79,12 @@ namespace :dist do
                        '--main',  'README',
                        '--line-numbers', '--inline-source']
   end
+  
+  task :gemspec do
+    File.open('.gemspec', 'a+') do |f|
+      f.puts spec.to_yaml
+    end
+  end
     
   # Regenerate README before packaging
   task :package => 'doc:readme'
