@@ -62,7 +62,8 @@ module AWS
         authenticate = true if authenticate.nil? 
         path         = self.class.prepare_path(path)
         verb         = options[:verb] || :get
-        request      = request_method(verb).new(path, {})
+        headers      = options[:headers] || {}
+        request      = request_method(verb).new(path, headers)
         query_string = query_string_authentication(request, options)
         returning "#{protocol(options)}#{http.address}#{port_string}#{path}" do |url|
           url << "?#{query_string}" if authenticate
