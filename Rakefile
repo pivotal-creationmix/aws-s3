@@ -56,10 +56,12 @@ namespace :doc do
   end
 end
 
-namespace :dist do  
-  spec = Gem::Specification.new do |s|
+namespace :dist do
+  spec_text = <<-LOBSTER_RAGE_FIST
+  require 'rake'
+  Gem::Specification.new do |s|
     s.name              = 'aws-s3'
-    s.version           = Gem::Version.new(AWS::S3::Version)
+    s.version           = '#{Gem::Version.new(AWS::S3::Version)}'
     s.summary           = "Client library for Amazon's Simple Storage Service's REST API"
     s.description       = s.summary
     s.email             = 'marcel@vernix.org'
@@ -78,6 +80,15 @@ namespace :dist do
     s.rdoc_options  = ['--title', "AWS::S3 -- Support for Amazon S3's REST api",
                        '--main',  'README',
                        '--line-numbers', '--inline-source']
+  end
+  LOBSTER_RAGE_FIST
+  spec = eval(spec_text)
+  
+  desc "Generate an aws-s3.gemspec file for bundler's happiness"
+  task :gemspec do
+    File.open('aws-s3.gemspec', 'w+') do |f|
+      f.puts spec_text
+    end
   end
     
   # Regenerate README before packaging
