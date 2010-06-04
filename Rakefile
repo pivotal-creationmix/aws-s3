@@ -11,6 +11,7 @@ def library_root
   File.dirname(__FILE__)
 end
 
+task :build => 'dist:package'
 task :default => :test
 
 Rake::TestTask.new do |test|
