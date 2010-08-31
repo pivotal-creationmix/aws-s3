@@ -1,3 +1,4 @@
+.idea
 .rake_tasks
 site/public/index.html
 pkg/

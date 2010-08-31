@@ -71,7 +71,13 @@ class ObjectTest < Test::Unit::TestCase
       @object.owner.foo
     end
   end
-  
+
+  def test_copying_an_object_and_passing_access_options
+    mock_object = flexmock(S3Object)
+    mock_object.should_receive(:put).with(S3Object.path!(@object.bucket.name, 'new-name-key'), :access => 'public_read', 'x-amz-copy-source' => @object.path)
+    @object.copy('new-name-key', :access => 'public_read')
+  end
+
   def test_fetching_object_value_generates_value_object
     mock_connection_for(S3Object, :returns => {:body => 'hello!'})
     value = S3Object.value('foo', 'bar')
